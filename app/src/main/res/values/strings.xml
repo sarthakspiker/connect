@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">connect+</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up_button">Sign-up</string>
+    <string name="welcome_text">Welcome to Connect+</string>
+    <string name="name">Name</string>
+    <string name="user_id">User ID / e-mail</string>
+    <string name="e_mail">e-mail</string>
+    <string name="dob">Date of birth : DDMMYYYY</string>
+    <string name="address">Address</string>
+    <string name="register_title">Let\'s Register You Up</string>
+    <string name="registration_successful">Registration Successful !</string>
+    <string name="continue_to_app">Continue</string>
+</resources>
