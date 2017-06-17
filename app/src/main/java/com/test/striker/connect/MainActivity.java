@@ -2,9 +2,10 @@ package com.test.striker.connect;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,11 +13,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public ArrayList<String> arrayList;
 TextView textView;
     TextView login;
     TextView register;
     int n = 3;
-    public ArrayList<String> arrayList;
     AutoCompleteTextView autoCompleteTextView;
     String s;
     public void register(){
@@ -27,11 +28,18 @@ TextView textView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Typeface helvetica = Typeface.createFromAsset(getAssets(),"Helvetica Light.ttf");
+
+        String[] strings = {"sarthak", "Sarthak", "Sarthak ", "yogendra", "kishore"};
+
         textView = (TextView) findViewById(R.id.textView);
         textView.setTypeface(helvetica);
         register = (TextView) findViewById(R.id.register);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.uid);
+        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.select_dialog_item, strings);
+        autoCompleteTextView.setAdapter(adapter);
+        autoCompleteTextView.setThreshold(3);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
