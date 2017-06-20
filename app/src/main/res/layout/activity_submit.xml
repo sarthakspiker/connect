@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.test.striker.connect.SubmitActivity"
-    android:background="@drawable/ubuntu">
+    android:background="@drawable/ubuntu"
+    tools:context="com.test.striker.connect.SubmitActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,51 +13,48 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/marginLeft"
         android:text="@string/registration_successful"
         android:textColor="@android:color/white"
-        android:gravity="center"
-        android:padding="@dimen/marginLeft"/>
+        android:textStyle="bold" />
     <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/marginLeft"
         android:text="@string/name"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:padding="@dimen/marginLeft"
-        android:id="@+id/name"/>
+        android:textColor="@android:color/white" />
     <TextView
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/marginLeft"
         android:text="@string/e_mail"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:padding="@dimen/marginLeft"
-        android:id="@+id/email"/>
+        android:textColor="@android:color/white" />
     <TextView
+        android:id="@+id/dob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/marginLeft"
         android:text="@string/dob"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:padding="@dimen/marginLeft"
-        android:id="@+id/dob"/>
+        android:textColor="@android:color/white" />
     <TextView
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/address"
-        android:textColor="@android:color/white"
-        android:gravity="center"
         android:padding="@dimen/marginLeft"
-        android:id="@+id/address"/>
+        android:text="@string/address"
+        android:textColor="@android:color/white" />
     </LinearLayout>
     <TextView
+        android:id="@+id/openup"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
-        android:text="@string/continue_to_app"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:typeface="serif"
+        android:text="@string/continue_to_app"
         android:textColor="@android:color/white"
-        android:id="@+id/openup"/>
+        android:typeface="serif" />
 </RelativeLayout>
