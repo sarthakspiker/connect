@@ -12,6 +12,8 @@ public class SubmitActivity extends AppCompatActivity {
     TextView dob;
     TextView address;
     TextView continueApp;
+    TextView phone;
+    TextView phoneType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +23,22 @@ public class SubmitActivity extends AppCompatActivity {
         email = (TextView) findViewById(R.id.email);
         dob = (TextView) findViewById(R.id.dob);
         address = (TextView) findViewById(R.id.address);
+        phone = (TextView) findViewById(R.id.phoneText);
+        phoneType = (TextView) findViewById(R.id.phoneType);
 
         String nameString = "Name : " + getIntent().getStringExtra("name");
         String emailString = "Email : " + getIntent().getStringExtra("email");
         String dobString = "DOB : " + getIntent().getStringExtra("dob");
         String addressString = "Address : " + getIntent().getStringExtra("address");
+        String phoneString = "Phone : " + getIntent().getStringExtra("phone");
+        String phone_type = getIntent().getStringExtra("phone_type");
 
         name.setText(nameString);
         email.setText(emailString);
         dob.setText(dobString);
         address.setText(addressString);
+        phone.setText(phoneString);
+        phoneType.setText(phone_type);
         continueApp = (TextView) findViewById(R.id.openup);
         continueApp.setOnClickListener(new View.OnClickListener() {
             @Override

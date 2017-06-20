@@ -1,18 +1,37 @@
 package com.test.striker.connect;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class RegisterActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 TextView submit;
     EditText name;
     EditText email;
     EditText dob;
     EditText address;
+    EditText phone;
+    Spinner spinner;
+    ArrayList<String> arrayList;
+    String phoneType = "Home";
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        phoneType = adapterView.getItemAtPosition(i).toString();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,15 +41,39 @@ TextView submit;
         dob = (EditText) findViewById(R.id.editText3);
         address = (EditText) findViewById(R.id.editText4);
         submit = (TextView) findViewById(R.id.submit);
+        phone = (EditText) findViewById(R.id.phoneText);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+        arrayList = new ArrayList<>();
+        arrayList.add("Home");
+        arrayList.add("Office");
+        arrayList.add("Other");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList);
+        spinner.setAdapter(adapter);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RegisterActivity.this,SubmitActivity.class);
-                i.putExtra("name",name.getText().toString());
-                i.putExtra("email",email.getText().toString());
-                i.putExtra("dob",dob.getText().toString());
-                i.putExtra("address",address.getText().toString());
+                if (name.getText().toString().trim().equals("")) {
+                    name.setError("Name is required!");
+                } else if (email.getText().toString().trim().equals("")) {
+                    email.setError("Email is required!");
+                } else if (dob.getText().toString().trim().equals("")) {
+                    dob.setError("DOB is required!");
+                } else if (address.getText().toString().trim().equals("")) {
+                    address.setError("Address is required!");
+                } else if (phone.getText().toString().trim().equals("")) {
+                    phone.setError("Phone number is required!");
+                } else {
+                    Intent i = new Intent(RegisterActivity.this, SubmitActivity.class);
+                    i.putExtra("name", name.getText().toString());
+                    i.putExtra("email", email.getText().toString());
+                    i.putExtra("dob", dob.getText().toString());
+                    i.putExtra("address", address.getText().toString());
+                    i.putExtra("phone", phone.getText().toString());
+                    i.putExtra("phone_type", phoneType);
                 startActivity(i);
+                }
             }
         });
     }

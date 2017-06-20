@@ -6,11 +6,13 @@
     <string name="name">Name</string>
     <string name="user_id">User ID / e-mail</string>
     <string name="e_mail">e-mail</string>
-    <string name="dob">Date of birth : DDMMYYYY</string>
+    <string name="dob">Date of birth : DD/MM/YYYY</string>
     <string name="address">Address</string>
     <string name="register_title">Let\'s Register You Up</string>
     <string name="registration_successful">Registration Successful !</string>
     <string name="continue_to_app">Continue</string>
     <string name="or">(or)</string>
     <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="phonetype">Phone Type</string>
 </resources>
