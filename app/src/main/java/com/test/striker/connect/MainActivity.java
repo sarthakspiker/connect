@@ -31,13 +31,18 @@ TextView textView;
 
         Typeface helvetica = Typeface.createFromAsset(getAssets(),"Helvetica Light.ttf");
 
-        String[] strings = {"sarthak", "Sarthak", "Sarthak ", "yogendra", "kishore"};
-
         textView = (TextView) findViewById(R.id.textView);
         textView.setTypeface(helvetica);
         register = (TextView) findViewById(R.id.register);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.uid);
-        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.select_dialog_item, strings);
+        arrayList = new ArrayList<>();
+        arrayList.add("sarthak");
+        arrayList.add("Sarthak");
+        arrayList.add("Sarthak ");
+        arrayList.add("prakhar");
+        arrayList.add("kishore");
+        arrayList.add("yogendra");
+        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.select_dialog_item, arrayList);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setThreshold(3);
         register.setOnClickListener(new View.OnClickListener() {
@@ -51,13 +56,6 @@ TextView textView;
             @Override
             public void onClick(View view) {
                 s = autoCompleteTextView.getText().toString();
-                arrayList = new ArrayList<String>();
-                arrayList.add("sarthak");
-                arrayList.add("Sarthak");
-                arrayList.add("Sarthak ");
-                arrayList.add("prakhar");
-                arrayList.add("kishore");
-                arrayList.add("yogendra");
                 if (arrayList.contains(s)){
                 Intent intent = new Intent();
                 intent.setClassName("com.android.calculator2","com.android.calculator2.Calculator");
