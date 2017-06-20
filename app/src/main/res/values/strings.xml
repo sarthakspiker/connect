@@ -11,4 +11,6 @@
     <string name="register_title">Let\'s Register You Up</string>
     <string name="registration_successful">Registration Successful !</string>
     <string name="continue_to_app">Continue</string>
+    <string name="or">(or)</string>
+    <string name="password">Password</string>
 </resources>

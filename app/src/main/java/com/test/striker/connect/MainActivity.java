@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,8 @@ TextView textView;
     TextView register;
     int n = 3;
     AutoCompleteTextView autoCompleteTextView;
-    String s;
+    EditText nameText, passwordText;
+    String name, uid, password;
     public void register(){
         Intent i = new Intent(MainActivity.this,RegisterActivity.class);
         startActivity(i);
@@ -60,6 +62,8 @@ TextView textView;
         textView.setTypeface(helvetica);
         register = (TextView) findViewById(R.id.register);
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.uid);
+        nameText = (EditText) findViewById(R.id.editText1);
+        passwordText = (EditText) findViewById(R.id.password);
         arrayList = new ArrayList<>();
         arrayList.add("sarthak");
         arrayList.add("Sarthak");
@@ -67,7 +71,7 @@ TextView textView;
         arrayList.add("prakhar");
         arrayList.add("kishore");
         arrayList.add("yogendra");
-        ArrayAdapter adapter = new ArrayAdapter(MainActivity.this, android.R.layout.select_dialog_item, arrayList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_item, arrayList);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setThreshold(3);
         register.setOnClickListener(new View.OnClickListener() {
@@ -80,14 +84,16 @@ TextView textView;
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s = autoCompleteTextView.getText().toString();
-                if (arrayList.contains(s)){
+                uid = autoCompleteTextView.getText().toString();
+                name = nameText.getText().toString();
+                password = passwordText.getText().toString();
+                if ((arrayList.contains(uid) || arrayList.contains(name)) && arrayList.contains(password)) {
                 Intent intent = new Intent();
                 intent.setClassName("com.android.calculator2","com.android.calculator2.Calculator");
                 startActivity(intent);            }
                 else {
                     n--;
-                    Toast.makeText(MainActivity.this,"Wrong Crudentials :"+ n +" trial left",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Wrong Credentials :" + n + " trial left", Toast.LENGTH_SHORT).show();
                     if (n<=0){
                         register();
                     n=3;
