@@ -43,7 +43,7 @@ public class SubmitActivity extends AppCompatActivity {
         Bitmap bitmap = getIntent().getParcelableExtra("picture");
         if (bitmap != null) {
             RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            roundedBitmapDrawable.setCornerRadius(50.0f);
+            roundedBitmapDrawable.setCornerRadius(150.0f);
             roundedBitmapDrawable.setAntiAlias(true);
             imageView.setImageDrawable(roundedBitmapDrawable);
         }

@@ -38,7 +38,7 @@ TextView submit;
             Bundle extras = data.getExtras();
             bitmap = (Bitmap) extras.get("data");
             roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            roundedBitmapDrawable.setCornerRadius(50.0f);
+            roundedBitmapDrawable.setCornerRadius(150.0f);
             roundedBitmapDrawable.setAntiAlias(true);
             profile.setImageDrawable(roundedBitmapDrawable);
         }
