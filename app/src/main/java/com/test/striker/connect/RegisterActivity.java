@@ -1,18 +1,24 @@
 package com.test.striker.connect;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 TextView submit;
     EditText name;
     EditText email;
@@ -22,6 +28,28 @@ TextView submit;
     Spinner spinner;
     ArrayList<String> arrayList;
     String phoneType = "Home";
+    ImageView profile;
+    RoundedBitmapDrawable roundedBitmapDrawable;
+    Bitmap bitmap;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            bitmap = (Bitmap) extras.get("data");
+            roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCornerRadius(50.0f);
+            roundedBitmapDrawable.setAntiAlias(true);
+            profile.setImageDrawable(roundedBitmapDrawable);
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
@@ -43,6 +71,7 @@ TextView submit;
         submit = (TextView) findViewById(R.id.submit);
         phone = (EditText) findViewById(R.id.phoneText);
         spinner = (Spinner) findViewById(R.id.spinner);
+        profile = (ImageView) findViewById(R.id.profile);
         spinner.setOnItemSelectedListener(this);
         arrayList = new ArrayList<>();
         arrayList.add("Home");
@@ -50,7 +79,12 @@ TextView submit;
         arrayList.add("Other");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, arrayList);
         spinner.setAdapter(adapter);
-
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +106,7 @@ TextView submit;
                     i.putExtra("address", address.getText().toString());
                     i.putExtra("phone", phone.getText().toString());
                     i.putExtra("phone_type", phoneType);
+                    i.putExtra("picture", bitmap);
                 startActivity(i);
                 }
             }

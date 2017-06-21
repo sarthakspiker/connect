@@ -19,6 +19,15 @@
         android:text="@string/register_title"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/round_layout"
+            android:contentDescription="@string/profile_pic"
+            android:src="@drawable/blank_profile" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
