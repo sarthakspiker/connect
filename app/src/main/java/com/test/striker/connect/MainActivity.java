@@ -2,6 +2,8 @@ package com.test.striker.connect;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -88,8 +91,20 @@ TextView textView;
                 name = nameText.getText().toString();
                 password = passwordText.getText().toString();
                 if ((arrayList.contains(uid) || arrayList.contains(name)) && arrayList.contains(password)) {
-                Intent intent = new Intent();
-                intent.setClassName("com.android.calculator2","com.android.calculator2.Calculator");
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", "Name : Sarthak Kumar");
+                    bundle.putString("email", "Email : spikerstriker@gmail.com");
+                    bundle.putString("dob", "DOB : 19121997");
+                    bundle.putString("address", "Address : India");
+                    bundle.putString("phone", "Phone : 9962029154");
+                    bundle.putString("phone_type", "Home");
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ubuntu);
+                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                    byte[] byteArray = bs.toByteArray();
+                    bundle.putByteArray("picture", byteArray);
+                    intent.putExtras(bundle);
                 startActivity(intent);            }
                 else {
                     n--;
