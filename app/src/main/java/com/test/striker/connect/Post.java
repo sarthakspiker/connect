@@ -7,38 +7,23 @@ import static java.sql.Types.NULL;
  */
 
 public class Post {
-    private int mProfile = NULL;
     private String mName;
     private String mTime;
     private String mStatus;
     private int mImgId = NULL;
 
-    public Post(String mName, String mTime, String mStatus) {
-        this.mName = mName;
-        this.mTime = mTime;
-        this.mStatus = mStatus;
-    }
-
     public Post(String mName, String mTime, String mStatus, int mImgId) {
-
         this.mName = mName;
         this.mTime = mTime;
         this.mStatus = mStatus;
         this.mImgId = mImgId;
     }
 
-    public Post(int mProfile, String mName, String mTime, String mStatus, int mImgId) {
+    public Post(String mName, String mTime, String mStatus) {
 
-        this.mProfile = mProfile;
         this.mName = mName;
         this.mTime = mTime;
         this.mStatus = mStatus;
-        this.mImgId = mImgId;
-    }
-
-
-    public int getmProfile() {
-        return mProfile;
     }
 
     public String getmName() {

@@ -22,7 +22,6 @@ import static java.sql.Types.NULL;
 
 public class PostAdapter extends ArrayAdapter<Post> {
     String s;
-
     public PostAdapter(Context context, ArrayList<Post> post) {
         super(context, 0, post);
     }
@@ -36,12 +35,6 @@ public class PostAdapter extends ArrayAdapter<Post> {
         }
         Post currentPost = getItem(position);
 
-        ImageView profileImageView = (ImageView) listItemView.findViewById(R.id.profile_image);
-
-        profileImageView.setImageResource(currentPost.getmProfile());
-        if (currentPost.getmProfile() == NULL)
-            profileImageView.setImageResource(R.drawable.blank_profile);
-
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.name_text);
         nameTextView.setText(currentPost.getmName());
 
@@ -52,9 +45,11 @@ public class PostAdapter extends ArrayAdapter<Post> {
         statusTextView.setText(currentPost.getmStatus());
 
         ImageView uploadedImageView = (ImageView) listItemView.findViewById(R.id.uploaded_image);
-        profileImageView.setImageResource(currentPost.getmImgId());
-        if (currentPost.getmImgId() == NULL)
+        if (currentPost.getmImgId() == NULL) {
             uploadedImageView.setVisibility(View.GONE);
+        } else {
+            uploadedImageView.setImageResource(currentPost.getmImgId());
+        }
 
 
         Button button = (Button) listItemView.findViewById(R.id.comment_button);
@@ -68,8 +63,6 @@ public class PostAdapter extends ArrayAdapter<Post> {
                     textView.setText(s);
                     editText.setText("");
                 }
-
-
             }
         });
         return listItemView;

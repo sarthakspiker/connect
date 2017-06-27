@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -38,19 +37,13 @@ public class WallFragment extends Fragment {
         final Random random = new Random();
         final ArrayList<Post> posts = new ArrayList<>();
 
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        posts.add(new Post("Sarthak", "9:30", s));
-        Collections.reverse(posts);
-
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.attractions));
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.chennai));
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.hotel));
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.restaurant));
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.shopping));
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.chennai));
+        posts.add(new Post("Sarthak", random.nextInt(12) + ":" + (random.nextInt(50) + 10), s, R.drawable.attractions));
         final PostAdapter adapter = new PostAdapter(getActivity(), posts);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
