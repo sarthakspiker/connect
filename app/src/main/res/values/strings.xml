@@ -16,4 +16,9 @@
     <string name="phone">Phone</string>
     <string name="phonetype">Phone Type</string>
     <string name="profile_pic">Profile Pic</string>
+    <string name="test_array">hi this is a test string to check paragraph layout.
+        This line simply creates a new line and checks the integrity of the layout if the data feed is a large string</string>
+    <string name="comment">Comment</string>
+    <string name="nice">nice!!</string>
+    <string name="post">Post</string>
 </resources>

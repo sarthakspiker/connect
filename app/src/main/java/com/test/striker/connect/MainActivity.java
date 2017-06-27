@@ -1,7 +1,9 @@
 package com.test.striker.connect;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -19,14 +21,48 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String mypreference = "mypref";
+    public static final String Name = "nameKey";
+    public static final String UID = "emailKey";
+    public static final String Password = "passKey";
     public ArrayList<String> arrayList;
-TextView textView;
+    TextView textView;
     TextView login;
     TextView register;
     int n = 3;
     AutoCompleteTextView autoCompleteTextView;
     EditText nameText, passwordText;
     String name, uid, password;
+    SharedPreferences sharedPreferences;
+
+    public void Save() {
+        String n = nameText.getText().toString();
+        String p = passwordText.getText().toString();
+        String e = autoCompleteTextView.getText().toString();
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(Name, n);
+        editor.putString(UID, e);
+        editor.putString(Password, p);
+
+        editor.apply();
+    }
+
+    public void Get() {
+        sharedPreferences = getSharedPreferences(mypreference,
+                Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains(Name)) {
+            nameText.setText(sharedPreferences.getString(Name, ""));
+        }
+        if (sharedPreferences.contains(UID)) {
+            autoCompleteTextView.setText(sharedPreferences.getString(UID, ""));
+        }
+        if (sharedPreferences.contains(Password)) {
+            passwordText.setText(sharedPreferences.getString(Password, ""));
+        }
+    }
     public void register(){
         Intent i = new Intent(MainActivity.this,RegisterActivity.class);
         startActivity(i);
@@ -64,9 +100,13 @@ TextView textView;
         textView = (TextView) findViewById(R.id.textView);
         textView.setTypeface(helvetica);
         register = (TextView) findViewById(R.id.register);
+
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.uid);
         nameText = (EditText) findViewById(R.id.editText1);
         passwordText = (EditText) findViewById(R.id.password);
+
+        sharedPreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+        Get();
         arrayList = new ArrayList<>();
         arrayList.add("sarthak");
         arrayList.add("Sarthak");
@@ -90,7 +130,8 @@ TextView textView;
                 uid = autoCompleteTextView.getText().toString();
                 name = nameText.getText().toString();
                 password = passwordText.getText().toString();
-                if ((arrayList.contains(uid) || arrayList.contains(name)) && arrayList.contains(password)) {
+                Save();
+                if (/*(arrayList.contains(uid) || arrayList.contains(name)) && arrayList.contains(password)*/ true) {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("name", "Name : Sarthak Kumar");
@@ -99,7 +140,7 @@ TextView textView;
                     bundle.putString("address", "Address : India");
                     bundle.putString("phone", "Phone : 9962029154");
                     bundle.putString("phone_type", "Home");
-                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ubuntu);
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.blank_profile);
                     ByteArrayOutputStream bs = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
                     byte[] byteArray = bs.toByteArray();

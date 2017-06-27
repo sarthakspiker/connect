@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 
 public class PageAdapter extends FragmentPagerAdapter {
-    private String tabTitles[] = new String[]{"Home", "Profile"};
+    private String tabTitles[] = new String[]{"Feed", "Profile"};
 
     public PageAdapter(FragmentManager fm) {
         super(fm);
@@ -19,7 +19,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
 
-            return new ProfileFragment();
+            return new WallFragment();
         } else {
             return new ProfileFragment();
         }
