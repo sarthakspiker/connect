@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/profile"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:layout_gravity="center"
             android:background="@drawable/round_layout"
             android:contentDescription="@string/profile_pic"
@@ -24,6 +24,7 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginLeft"
             android:padding="@dimen/marginLeft"
             android:text="@string/name"
             android:textColor="@android:color/white" />

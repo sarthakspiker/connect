@@ -3,5 +3,6 @@
     android:id="@+id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:divider="@null"
     android:drawSelectorOnTop="true"
     android:orientation="vertical" />

@@ -1,8 +1,10 @@
 package com.test.striker.connect;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -12,29 +14,48 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static android.app.Activity.RESULT_OK;
 import static com.test.striker.connect.R.id.profile;
+import static com.test.striker.connect.RegisterActivity.REQUEST_IMAGE_CAPTURE;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProfileFragment extends Fragment {
+    TextView name;
+    TextView email;
+    TextView dob;
+    TextView address;
+    TextView phone;
+    TextView phoneType;
+    ImageView imageView;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCornerRadius(150.0f);
+            roundedBitmapDrawable.setAntiAlias(true);
+            imageView.setImageDrawable(roundedBitmapDrawable);
+        }
+    }
 
+    private void dispatchTakePictureIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView name;
-        TextView email;
-        TextView dob;
-        TextView address;
-        TextView phone;
-        TextView phoneType;
-        ImageView imageView;
 
         Bundle bundle = getActivity().getIntent().getExtras();
         String nameString = bundle.getString("name");
@@ -65,6 +86,12 @@ public class ProfileFragment extends Fragment {
         phone.setText(phoneString);
         phoneType.setText(phone_type);
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+            }
+        });
         return rootView;
     }
 }
