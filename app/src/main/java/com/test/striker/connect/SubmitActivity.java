@@ -2,7 +2,6 @@ package com.test.striker.connect;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -10,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.ByteArrayOutputStream;
 
 import static com.test.striker.connect.R.id.profile;
 
@@ -24,6 +21,7 @@ public class SubmitActivity extends AppCompatActivity {
     TextView phone;
     TextView phoneType;
     ImageView imageView;
+    PictureHandler pictureHandler = new PictureHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +40,7 @@ public class SubmitActivity extends AppCompatActivity {
         final String addressString = "Address : " + getIntent().getStringExtra("address");
         final String phoneString = "Phone : " + getIntent().getStringExtra("phone");
         final String phone_type = getIntent().getStringExtra("phone_type");
-        Bitmap bitmap = getIntent().getParcelableExtra("picture");
+        Bitmap bitmap = pictureHandler.loadImageFromStorage(getApplicationContext());
         if (bitmap != null) {
             RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
             roundedBitmapDrawable.setCornerRadius(150.0f);
@@ -67,14 +65,6 @@ public class SubmitActivity extends AppCompatActivity {
                 bundle.putString("address", addressString);
                 bundle.putString("phone", phoneString);
                 bundle.putString("phone_type", phone_type);
-                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                Bitmap bitmap1 = getIntent().getParcelableExtra("picture");
-                if (bitmap1 == null) {
-                    bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.blank_profile);
-                }
-                bitmap1.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                byte[] byteArray = bs.toByteArray();
-                bundle.putByteArray("picture", byteArray);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

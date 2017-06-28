@@ -20,14 +20,27 @@
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/profile"
+        <RelativeLayout
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/round_layout"
             android:contentDescription="@string/profile_pic"
             android:src="@drawable/blank_profile" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/profile_pic"
+                android:src="@drawable/camera_icon" />
+        </RelativeLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

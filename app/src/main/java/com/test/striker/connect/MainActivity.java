@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -140,11 +137,6 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString("address", "Address : India");
                     bundle.putString("phone", "Phone : 9962029154");
                     bundle.putString("phone_type", "Home");
-                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.blank_profile);
-                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                    byte[] byteArray = bs.toByteArray();
-                    bundle.putByteArray("picture", byteArray);
                     intent.putExtras(bundle);
                 startActivity(intent);            }
                 else {

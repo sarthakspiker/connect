@@ -2,7 +2,6 @@ package com.test.striker.connect;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -30,6 +29,7 @@ public class ProfileFragment extends Fragment {
     TextView phone;
     TextView phoneType;
     ImageView imageView;
+    PictureHandler pictureHandler = new PictureHandler();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -44,6 +44,7 @@ public class ProfileFragment extends Fragment {
             roundedBitmapDrawable.setCornerRadius(150.0f);
             roundedBitmapDrawable.setAntiAlias(true);
             imageView.setImageDrawable(roundedBitmapDrawable);
+            pictureHandler.saveToInternalStorage(bitmap, getContext());
         }
     }
 
@@ -64,7 +65,6 @@ public class ProfileFragment extends Fragment {
         String addressString = bundle.getString("address");
         String phoneString = bundle.getString("phone");
         String phone_type = bundle.getString("phone_type");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bundle.getByteArray("picture"), 0, bundle.getByteArray("picture").length);
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         name = (TextView) rootView.findViewById(R.id.name);
         email = (TextView) rootView.findViewById(R.id.email);
@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment {
         phone = (TextView) rootView.findViewById(R.id.phoneText);
         phoneType = (TextView) rootView.findViewById(R.id.phoneType);
         imageView = (ImageView) rootView.findViewById(profile);
+        Bitmap bitmap = pictureHandler.loadImageFromStorage(getContext());
         if (bitmap != null) {
             RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
             roundedBitmapDrawable.setCornerRadius(150.0f);

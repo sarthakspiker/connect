@@ -31,6 +31,7 @@ TextView submit;
     ImageView profile;
     RoundedBitmapDrawable roundedBitmapDrawable;
     Bitmap bitmap;
+    PictureHandler pictureHandler = new PictureHandler();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -41,6 +42,7 @@ TextView submit;
             roundedBitmapDrawable.setCornerRadius(150.0f);
             roundedBitmapDrawable.setAntiAlias(true);
             profile.setImageDrawable(roundedBitmapDrawable);
+            pictureHandler.saveToInternalStorage(bitmap, getApplicationContext());
         }
     }
 
@@ -106,7 +108,6 @@ TextView submit;
                     i.putExtra("address", address.getText().toString());
                     i.putExtra("phone", phone.getText().toString());
                     i.putExtra("phone_type", phoneType);
-                    i.putExtra("picture", bitmap);
                 startActivity(i);
                 }
             }
