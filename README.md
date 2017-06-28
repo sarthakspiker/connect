@@ -1,14 +1,18 @@
 # connect
-A Social Platform
+A Social Platform 
 
 Created during an internship this app is a Social Platform Mockup.
 
 # Main Modules
 
 Login
+
 Registration
+
 Wall
+
 Contacts
+
 Profile
 
 
