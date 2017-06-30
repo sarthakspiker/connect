@@ -105,12 +105,11 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         Get();
         arrayList = new ArrayList<>();
-        arrayList.add("sarthak");
-        arrayList.add("Sarthak");
-        arrayList.add("Sarthak ");
-        arrayList.add("prakhar");
-        arrayList.add("kishore");
-        arrayList.add("yogendra");
+        arrayList.add("admin");
+        arrayList.add("Admin");
+        arrayList.add("admin ");
+        arrayList.add("Admin ");
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.select_dialog_item, arrayList);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setThreshold(3);
@@ -128,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 name = nameText.getText().toString();
                 password = passwordText.getText().toString();
                 Save();
-                if (/*(arrayList.contains(uid) || arrayList.contains(name)) && arrayList.contains(password)*/ true) {
+                if ((arrayList.contains(uid) || arrayList.contains(name)) && arrayList.contains(password)) {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("name", "Name : Sarthak Kumar");
