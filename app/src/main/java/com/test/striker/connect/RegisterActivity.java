@@ -1,5 +1,6 @@
 package com.test.striker.connect;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,11 +16,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.test.striker.connect.helper.DatabaseHelper;
+
 import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     static final int REQUEST_IMAGE_CAPTURE = 1;
-TextView submit;
+    DatabaseHelper db;
+    TextView submit;
     EditText name;
     EditText email;
     EditText dob;
@@ -75,6 +79,7 @@ TextView submit;
         spinner = (Spinner) findViewById(R.id.spinner);
         profile = (ImageView) findViewById(R.id.profile);
         spinner.setOnItemSelectedListener(this);
+        db = new DatabaseHelper(getApplicationContext());
         arrayList = new ArrayList<>();
         arrayList.add("Home");
         arrayList.add("Office");
@@ -101,14 +106,30 @@ TextView submit;
                 } else if (phone.getText().toString().trim().equals("")) {
                     phone.setError("Phone number is required!");
                 } else {
-                    Intent i = new Intent(RegisterActivity.this, SubmitActivity.class);
-                    i.putExtra("name", name.getText().toString());
-                    i.putExtra("email", email.getText().toString());
-                    i.putExtra("dob", dob.getText().toString());
-                    i.putExtra("address", address.getText().toString());
-                    i.putExtra("phone", phone.getText().toString());
-                    i.putExtra("phone_type", phoneType);
-                startActivity(i);
+
+                    final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
+                    progressDialog.setMessage("Logging you in..");
+                    progressDialog.show();
+
+//        After 2 Seconds i dismiss progress Dialog
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            super.run();
+                            try {
+                                Thread.sleep(1000);
+                                if (progressDialog.isShowing())
+                                    progressDialog.dismiss();
+                                db.deleteProfile(1);
+                                db.createProfile(new Profile(name.getText().toString(), 1, name.getText().toString(), email.getText().toString(), dob.getText().toString(), phone.getText().toString()
+                                        , phoneType, 1, address.getText().toString()));
+                                Intent i = new Intent(RegisterActivity.this, SubmitActivity.class);
+                                startActivity(i);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
                 }
             }
         });

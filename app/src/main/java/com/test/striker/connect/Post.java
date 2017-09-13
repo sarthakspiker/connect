@@ -9,37 +9,80 @@ import static java.sql.Types.NULL;
 public class Post {
     private String mName;
     private String mTime;
-    private String mStatus;
+    private String mPost;
     private int mImgId = NULL;
+    private int mLikes = 0;
+    private int mComments = 0;
 
-    public Post(String mName, String mTime, String mStatus, int mImgId) {
+    //Constructors
+    public Post(String mName, String mTime, String mPost, int mLikes, int mComments, int mImgId) {
         this.mName = mName;
         this.mTime = mTime;
-        this.mStatus = mStatus;
+        this.mPost = mPost;
         this.mImgId = mImgId;
+        this.mLikes = mLikes;
+        this.mComments = mComments;
     }
 
-    public Post(String mName, String mTime, String mStatus) {
+    public Post(String mName, String mTime, String mPost, int mLikes, int mComments) {
 
         this.mName = mName;
         this.mTime = mTime;
-        this.mStatus = mStatus;
+        this.mPost = mPost;
+        this.mLikes = mLikes;
+        this.mComments = mComments;
     }
 
-    public String getmName() {
+    public Post() {
+    }
+
+    //Getters
+    public String getName() {
         return mName;
     }
 
-    public String getmTime() {
+    //Setters
+    public void setName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getTime() {
         return mTime;
     }
 
-    public String getmStatus() {
-        return mStatus;
+    public void setTime(String mTime) {
+        this.mTime = mTime;
     }
 
-    public int getmImgId() {
+    public String getPost() {
+        return mPost;
+    }
+
+    public void setPost(String mPost) {
+        this.mPost = mPost;
+    }
+
+    public int getImgId() {
         return mImgId;
     }
 
+    public void setImgId(int mImgId) {
+        this.mImgId = mImgId;
+    }
+
+    public int getComments() {
+        return mComments;
+    }
+
+    public void setComments(int mComments) {
+        this.mComments = mComments;
+    }
+
+    public int getLikes() {
+        return mLikes;
+    }
+
+    public void setLikes(int mLikes) {
+        this.mLikes = mLikes;
+    }
 }

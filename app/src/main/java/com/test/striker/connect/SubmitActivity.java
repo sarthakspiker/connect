@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.test.striker.connect.R.id.profile;
+import com.test.striker.connect.helper.DatabaseHelper;
+
+import java.util.ArrayList;
 
 public class SubmitActivity extends AppCompatActivity {
     TextView name;
@@ -21,25 +23,33 @@ public class SubmitActivity extends AppCompatActivity {
     TextView phone;
     TextView phoneType;
     ImageView imageView;
+    DatabaseHelper db;
+    ArrayList<Profile> profile;
     PictureHandler pictureHandler = new PictureHandler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
+
         name = (TextView) findViewById(R.id.name);
         email = (TextView) findViewById(R.id.email);
         dob = (TextView) findViewById(R.id.dob);
         address = (TextView) findViewById(R.id.address);
         phone = (TextView) findViewById(R.id.phoneText);
         phoneType = (TextView) findViewById(R.id.phoneType);
-        imageView = (ImageView) findViewById(profile);
+        imageView = (ImageView) findViewById(R.id.profile);
 
-        final String nameString = "Name : " + getIntent().getStringExtra("name");
-        final String emailString = "Email : " + getIntent().getStringExtra("email");
-        final String dobString = "DOB : " + getIntent().getStringExtra("dob");
-        final String addressString = "Address : " + getIntent().getStringExtra("address");
-        final String phoneString = "Phone : " + getIntent().getStringExtra("phone");
-        final String phone_type = getIntent().getStringExtra("phone_type");
+        db = new DatabaseHelper(getApplicationContext());
+        profile = db.getAllProfile();
+        Profile mProfile = profile.get(0);
+
+        final String nameString = "Name : " + mProfile.getName();
+        final String emailString = "Email : " + mProfile.getEmail();
+        final String dobString = "DOB : " + mProfile.getDob();
+        final String addressString = "Address : " + mProfile.getAddress();
+        final String phoneString = "Phone : " + mProfile.getPhone();
+        final String phone_type = mProfile.getPhoneType();
+
         Bitmap bitmap = pictureHandler.loadImageFromStorage(getApplicationContext());
         if (bitmap != null) {
             RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
@@ -58,14 +68,6 @@ public class SubmitActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SubmitActivity.this, HomeActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("name", nameString);
-                bundle.putString("email", emailString);
-                bundle.putString("dob", dobString);
-                bundle.putString("address", addressString);
-                bundle.putString("phone", phoneString);
-                bundle.putString("phone_type", phone_type);
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

@@ -5,16 +5,17 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.test.striker.connect.helper.DatabaseHelper;
+
+import java.util.ArrayList;
+
 import static android.app.Activity.RESULT_OK;
-import static com.test.striker.connect.R.id.profile;
 import static com.test.striker.connect.RegisterActivity.REQUEST_IMAGE_CAPTURE;
 
 
@@ -29,6 +30,8 @@ public class ProfileFragment extends Fragment {
     TextView phone;
     TextView phoneType;
     ImageView imageView;
+    DatabaseHelper db;
+    ArrayList<Profile> profile;
     PictureHandler pictureHandler = new PictureHandler();
 
     public ProfileFragment() {
@@ -40,10 +43,11 @@ public class ProfileFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            roundedBitmapDrawable.setCornerRadius(150.0f);
-            roundedBitmapDrawable.setAntiAlias(true);
-            imageView.setImageDrawable(roundedBitmapDrawable);
+            //RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            //roundedBitmapDrawable.setCornerRadius(150.0f);
+            //roundedBitmapDrawable.setAntiAlias(true);
+            //imageView.setImageDrawable(roundedBitmapDrawable);
+            imageView.setImageBitmap(bitmap);
             pictureHandler.saveToInternalStorage(bitmap, getContext());
         }
     }
@@ -58,41 +62,50 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle bundle = getActivity().getIntent().getExtras();
-        String nameString = bundle.getString("name");
-        String emailString = bundle.getString("email");
-        String dobString = bundle.getString("dob");
-        String addressString = bundle.getString("address");
-        String phoneString = bundle.getString("phone");
-        String phone_type = bundle.getString("phone_type");
-        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-        name = (TextView) rootView.findViewById(R.id.name);
-        email = (TextView) rootView.findViewById(R.id.email);
-        dob = (TextView) rootView.findViewById(R.id.dob);
-        address = (TextView) rootView.findViewById(R.id.address);
-        phone = (TextView) rootView.findViewById(R.id.phoneText);
-        phoneType = (TextView) rootView.findViewById(R.id.phoneType);
-        imageView = (ImageView) rootView.findViewById(profile);
-        Bitmap bitmap = pictureHandler.loadImageFromStorage(getContext());
-        if (bitmap != null) {
-            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            roundedBitmapDrawable.setCornerRadius(150.0f);
-            roundedBitmapDrawable.setAntiAlias(true);
-            imageView.setImageDrawable(roundedBitmapDrawable);
-        }
-        name.setText(nameString);
-        email.setText(emailString);
-        dob.setText(dobString);
-        address.setText(addressString);
-        phone.setText(phoneString);
-        phoneType.setText(phone_type);
+        db = new DatabaseHelper(getContext());
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakePictureIntent();
+        profile = db.getAllProfile();
+        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        if (!profile.isEmpty()) {
+            Profile mProfile = profile.get(0);
+
+            final String nameString = "Name : " + mProfile.getName();
+            final String emailString = "Email : " + mProfile.getEmail();
+            final String dobString = "DOB : " + mProfile.getDob();
+            final String addressString = "Address : " + mProfile.getAddress();
+            final String phoneString = "Phone : " + mProfile.getPhone();
+            final String phone_type = mProfile.getPhoneType();
+
+            name = (TextView) rootView.findViewById(R.id.name);
+            email = (TextView) rootView.findViewById(R.id.email);
+            dob = (TextView) rootView.findViewById(R.id.dob);
+            address = (TextView) rootView.findViewById(R.id.address);
+            phone = (TextView) rootView.findViewById(R.id.phoneText);
+            phoneType = (TextView) rootView.findViewById(R.id.phoneType);
+            imageView = (ImageView) rootView.findViewById(R.id.profile);
+            Bitmap bitmap = pictureHandler.loadImageFromStorage(getContext());
+            if (bitmap != null) {
+                //RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                //roundedBitmapDrawable.setCornerRadius(150.0f);
+                //roundedBitmapDrawable.setAntiAlias(true);
+                //imageView.setImageDrawable(roundedBitmapDrawable);
+                imageView.setImageBitmap(bitmap);
             }
-        });
+            name.setText(nameString);
+            email.setText(emailString);
+            dob.setText(dobString);
+            address.setText(addressString);
+            phone.setText(phoneString);
+            phoneType.setText(phone_type);
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dispatchTakePictureIntent();
+                }
+            });
+        }
         return rootView;
     }
 }

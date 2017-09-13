@@ -36,19 +36,25 @@ public class PostAdapter extends ArrayAdapter<Post> {
         Post currentPost = getItem(position);
 
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.name_text);
-        nameTextView.setText(currentPost.getmName());
+        nameTextView.setText(currentPost.getName());
 
         TextView timeTextView = (TextView) listItemView.findViewById(R.id.time_text);
-        timeTextView.setText(currentPost.getmTime());
+        timeTextView.setText(currentPost.getTime());
 
         TextView statusTextView = (TextView) listItemView.findViewById(R.id.status_text);
-        statusTextView.setText(currentPost.getmStatus());
+        statusTextView.setText(currentPost.getPost());
+
+        TextView likesTextView = (TextView) listItemView.findViewById(R.id.number_likes);
+        likesTextView.setText(String.valueOf(currentPost.getLikes()));
+
+        TextView commentsTextView = (TextView) listItemView.findViewById(R.id.number_comments);
+        commentsTextView.setText(String.valueOf(currentPost.getComments()));
 
         ImageView uploadedImageView = (ImageView) listItemView.findViewById(R.id.uploaded_image);
-        if (currentPost.getmImgId() == NULL) {
+        if (currentPost.getImgId() == NULL) {
             uploadedImageView.setVisibility(View.GONE);
         } else {
-            uploadedImageView.setImageResource(currentPost.getmImgId());
+            uploadedImageView.setImageResource(currentPost.getImgId());
         }
 
 

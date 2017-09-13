@@ -23,5 +23,7 @@ public class HomeActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 }
