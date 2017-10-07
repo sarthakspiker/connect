@@ -1,7 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
     android:layout_margin="@dimen/marginLeft"
     android:orientation="vertical"
     tools:context="com.test.striker.connect.StatsFragment">
@@ -43,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginStart="@dimen/marginLeft"
-            android:text="8"
+            android:text="6"
             android:textColor="@android:color/secondary_text_light" />
     </LinearLayout>
 
@@ -64,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginStart="@dimen/marginLeft"
-            android:text="8"
+            android:text="4"
             android:textColor="@android:color/secondary_text_light" />
     </LinearLayout>
 
@@ -106,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginStart="@dimen/marginLeft"
-            android:text="8"
+            android:text="6"
             android:textColor="@android:color/secondary_text_light" />
     </LinearLayout>
 
@@ -127,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/marginLeft"
             android:layout_marginStart="@dimen/marginLeft"
-            android:text="8"
+            android:text="4"
             android:textColor="@android:color/secondary_text_light" />
     </LinearLayout>
 
@@ -143,3 +147,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
+</ScrollView>
